@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.test.HelloController">
    <children>
       <TableView fx:id="table_view" layoutX="1.0" layoutY="77.0" prefHeight="322.0" prefWidth="600.0" />
       <Button fx:id="work_table" layoutX="45.0" layoutY="24.0" mnemonicParsing="false" onAction="#show_work_table" prefHeight="28.0" prefWidth="95.0" text="Workers" />
@@ -13,5 +13,6 @@
       <Button fx:id="clients_table" layoutX="197.0" layoutY="24.0" mnemonicParsing="false" onAction="#show_clients_table" prefHeight="28.0" prefWidth="95.0" text="clients" />
       <Button fx:id="moneys_table" layoutX="324.0" layoutY="25.0" mnemonicParsing="false" onAction="#check_cash" prefHeight="26.0" prefWidth="95.0" text="moneys" />
       <TextField fx:id="textField" layoutX="14.0" layoutY="413.0" prefHeight="28.0" prefWidth="222.0" />
+      <Button fx:id="profit" layoutX="260.0" layoutY="415.0" mnemonicParsing="false" onAction="#setProfit" text="profit" />
    </children>
 </AnchorPane>

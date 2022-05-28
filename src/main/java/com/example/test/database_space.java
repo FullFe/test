@@ -45,9 +45,22 @@ public class database_space {
     }
     public ResultSet fetchThird() {
         ResultSet resultSet = null;
-        String select = "SELECT w.id_worker, w.sal_worker * 12 * (1 -m.tax_worker) " +
-                "FROM work.worker w left " +
-                "join work.moneys m on w.id_worker = m.worker_moneys";
+        String select = "SELECT w.id_worker, w.sal_worker  * (1 -w.tax_worker)\n" +
+                "FROM work.worker w;";
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(select);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    public ResultSet fetchFourth(String nim) {
+        Integer.valueOf(nim);
+        ResultSet resultSet = null;
+        String select = "SELECT c.worker_clients, SUM(c.profit_clients)\n" +
+                "FROM work.clients c\n" +
+                "where c.worker_clients  ='" + nim + "'";
         try {
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(select);
             resultSet = preparedStatement.executeQuery();

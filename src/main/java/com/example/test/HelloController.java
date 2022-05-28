@@ -1,8 +1,11 @@
 package com.example.test;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,17 +24,17 @@ public class HelloController extends database_space {
     private TableColumn col4;
     @FXML
     private TextField textField;
-
-
     @FXML
     private Button moneys_table;
     @FXML
     private TableView table_view;
+    @FXML
+    private Button profit;
+
 
 
     @FXML
     private Button work_table;
-
     public void show_work_table() {
         work_table.setOnAction(event -> {
             table_view.setEditable(false);
@@ -103,26 +106,63 @@ public class HelloController extends database_space {
         });
     }
     public void check_cash(){
-        clients_table.setOnAction(event -> {
+        moneys_table.setOnAction(event -> {
             table_view.setEditable(false);
-            TableColumn tableColumn1 = new TableColumn<pocket, String>("CPU");
-            tableColumn1.setCellValueFactory(new PropertyValueFactory<pocket,String>("CPU"));
-            tableColumn1.setText("CPU");
+            col1 = new TableColumn<SALARY, String>("id");
+            col1.setCellValueFactory(new PropertyValueFactory<SALARY,String>("id"));
+            col2 = new TableColumn<SALARY, Integer>("salaryM");
+            col2.setCellValueFactory(new PropertyValueFactory<SALARY,Integer>("salaryM"));
+            col3 =  new TableColumn<SALARY, Integer>("salaryY");
+            col3.setCellValueFactory(new PropertyValueFactory<SALARY,Integer>("salaryY"));
+            table_view.getColumns().addAll(col1, col2, col3);
             database_space base = new database_space();
             ResultSet result = base.fetchThird();
-            ArrayList<pocket> man = new ArrayList<>();
+            ArrayList<SALARY> man = new ArrayList<>();
             while (true) {
                 try {
                     if (!result.next()) break;
-                    pocket peo = new pocket(result.getString(1),
-                            result.getString(2),
-                            result.getString(3)
+                    SALARY salary = new SALARY(result.getString(1),
+                            result.getInt(2)
                     );
-                    man.add(peo);
-                    table_view.getItems().add(peo);
+                    man.add(salary);
+                    table_view.getItems().add(salary);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            }
+            for (int i = 0; i<man.size();i++){
+                System.out.print(man.get(i).toString());
+            }
+        });
+    }
+
+    public void setProfit(){
+        profit.setOnAction(event -> {
+            table_view.setEditable(false);
+            col1 = new TableColumn<SALARY, String>("id");
+            col1.setCellValueFactory(new PropertyValueFactory<SALARY,String>("id"));
+            col2 = new TableColumn<SALARY, Integer>("sum");
+            col2.setCellValueFactory(new PropertyValueFactory<SALARY,Integer>("sum"));
+            table_view.getColumns().addAll(col1, col2);
+
+            database_space base = new database_space();
+            ResultSet result = base.fetchFourth( textField.getText().trim());
+            textField.clear();
+            ArrayList<PROFIT> man = new ArrayList<>();
+            while (true) {
+                try {
+                    if (!result.next()) break;
+                    PROFIT profit1 = new PROFIT(result.getString(1),
+                            result.getString(2)
+                    );
+                    man.add(profit1);
+                    table_view.getItems().add(profit1);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            for (int i = 0; i<man.size();i++){
+                System.out.print(man.get(i));
             }
         });
     }
