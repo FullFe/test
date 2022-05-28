@@ -43,11 +43,11 @@ public class database_space {
         }
         return resultSet;
     }
-    public ResultSet fetchThird(){
+    public ResultSet fetchThird() {
         ResultSet resultSet = null;
-        String select = "SELECT id_worker, sal_worker * 12 * (1 -tax_worker) " +
-                "FROM worker w left " +
-                "join moneys m on w.id_worker = m.worker_moneys";
+        String select = "SELECT w.id_worker, w.sal_worker * 12 * (1 -m.tax_worker) " +
+                "FROM work.worker w left " +
+                "join work.moneys m on w.id_worker = m.worker_moneys";
         try {
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(select);
             resultSet = preparedStatement.executeQuery();

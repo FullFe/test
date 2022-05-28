@@ -1,10 +1,7 @@
 package com.example.test;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumnBase;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.ResultSet;
@@ -18,13 +15,12 @@ public class HelloController extends database_space {
     private TableColumn col1;
     @FXML
     private TableColumn col2;
-
     @FXML
     private TableColumn col3;
-
     @FXML
     private TableColumn col4;
-
+    @FXML
+    private TextField textField;
 
 
     @FXML
