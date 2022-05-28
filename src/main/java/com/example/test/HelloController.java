@@ -30,7 +30,8 @@ public class HelloController extends database_space {
     private TableView table_view;
     @FXML
     private Button profit;
-
+    @FXML
+    private Button group_profit;
 
 
     @FXML
@@ -139,10 +140,10 @@ public class HelloController extends database_space {
     public void setProfit(){
         profit.setOnAction(event -> {
             table_view.setEditable(false);
-            col1 = new TableColumn<SALARY, String>("id");
-            col1.setCellValueFactory(new PropertyValueFactory<SALARY,String>("id"));
-            col2 = new TableColumn<SALARY, Integer>("sum");
-            col2.setCellValueFactory(new PropertyValueFactory<SALARY,Integer>("sum"));
+            col1 = new TableColumn<PROFIT, String>("id");
+            col1.setCellValueFactory(new PropertyValueFactory<PROFIT,String>("id"));
+            col2 = new TableColumn<PROFIT, Integer>("sum");
+            col2.setCellValueFactory(new PropertyValueFactory<PROFIT,Integer>("sum"));
             table_view.getColumns().addAll(col1, col2);
 
             database_space base = new database_space();
@@ -166,6 +167,38 @@ public class HelloController extends database_space {
             }
         });
     }
+    public void setGroupProfit(){
+        group_profit.setOnAction(event -> {
+            table_view.setEditable(false);
+            col1 = new TableColumn<PROFIT, String>("id");
+            col1.setCellValueFactory(new PropertyValueFactory<PROFIT,String>("id"));
+            col2 = new TableColumn<PROFIT, Integer>("sum");
+            col2.setCellValueFactory(new PropertyValueFactory<PROFIT,Integer>("sum"));
+            table_view.getColumns().addAll(col1, col2);
+
+            database_space base = new database_space();
+            ResultSet result = base.fetchFifth( textField.getText().trim());
+            textField.clear();
+            ArrayList<PROFIT> man = new ArrayList<>();
+            while (true) {
+                try {
+                    if (!result.next()) break;
+                    PROFIT profit1 = new PROFIT(result.getString(1),
+                            result.getString(2)
+                    );
+                    man.add(profit1);
+                    table_view.getItems().add(profit1);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            for (int i = 0; i<man.size();i++){
+                System.out.print(man.get(i));
+            }
+        });
+    }
+
+
 }
 
 

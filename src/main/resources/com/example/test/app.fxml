@@ -14,5 +14,6 @@
       <Button fx:id="moneys_table" layoutX="324.0" layoutY="25.0" mnemonicParsing="false" onAction="#check_cash" prefHeight="26.0" prefWidth="95.0" text="moneys" />
       <TextField fx:id="textField" layoutX="14.0" layoutY="413.0" prefHeight="28.0" prefWidth="222.0" />
       <Button fx:id="profit" layoutX="260.0" layoutY="415.0" mnemonicParsing="false" onAction="#setProfit" text="profit" />
+      <Button fx:id="group_profit" layoutX="346.0" layoutY="415.0" mnemonicParsing="false" onAction="#setGroupProfit" text="group" />
    </children>
 </AnchorPane>

@@ -69,4 +69,19 @@ public class database_space {
         }
         return resultSet;
     }
+
+    public ResultSet fetchFifth(String nim) {
+        Integer.valueOf(nim);
+        ResultSet resultSet = null;
+        String select = "SELECT c.worker_clients, SUM(c.profit_clients) * 0.95\n" +
+                "FROM work.clients c\n" +
+                "where c.worker_clients  ='" + nim + "'";
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(select);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 }
